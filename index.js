@@ -1,8 +1,11 @@
-const fs = require('fs');
 const Discord = require('discord.js');
 const { prefix, token } = require('./config.json');
-const client = new Discord.Client();
-const { stripIndents } = require("common-tags");
+const { Client, Intents } = require('discord.js');
+const myIntents = new Intents();
+myIntents.add('GUILD_PRESENCES', 'GUILD_MEMBERS');
+const client = new Client({ ws: { intents: Intents.ALL } });
+const stripIndents = require('common-tags');
+const fs = require('fs');
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
 this.channels = new Discord.Collection();
@@ -47,8 +50,8 @@ try {
     try {
     message.react('❤️')
                   .then(() => message.react('💔'));
-  }catch(e) {
-    console.log(e);
+  } catch (error) {
+    console.log(error);
   };
  }; //Close dating channels react
  }; //Close else if
@@ -63,6 +66,8 @@ client.on('guildMemberAdd', (member) => {
 
 //Send Goodbye Message
 client.on('guildMemberRemove', (member) => {
+	
+	client.users.fetch(member.id, true);
 
   var goodbyes = [
 	`Press F to pay respects to **${member.displayName}**.`,
@@ -74,16 +79,17 @@ client.on('guildMemberRemove', (member) => {
 	`Ouch, **${member.displayName}** let the door hit them on the way out.`,
 	`Farewell, **${member.displayName}**.`,
 	`**${member.displayName}** lost the game.`,
-  `**${member.displayName}** has abandoned us in this hell hole.`,
+  	`**${member.displayName}** has abandoned us in this hell hole.`,
 	`**${member.displayName}** has bailed on us.`,
-  `**${member.displayName}** vanished in a puff of smoke.`,
-  `**${member.displayName}** disappeared without a trace.`,
-  `Adieu, Adieu, to you and you and **${member.displayName}**.`,
-  `Way to go, guys. You bullied **${member.displayName}** out of the server.`,
+	`**${member.displayName}** vanished in a puff of smoke.`,
+	`**${member.displayName}** disappeared without a trace.`,
+	`Adieu, Adieu, to you and you and **${member.displayName}**.`,
+  	`Way to go, guys. You bullied **${member.displayName}** out of the server.`,
 	`In the words of Fall Out Boy, thanks for the memories, **${member.displayName}**.`,
 	`**${member.displayName}** went MIA.`,
-  `**${member.displayName}** couldn\'t hang.`,
-  `The server will be a better place without you, **${member.displayName}**.`,
+	`**${member.displayName}** couldn\'t hang.`,
+ 	`**${member.displayName}** was not the impostor. One impostor remains.`,
+	`The server will be a better place without you, **${member.displayName}**.`,
 	`**${member.displayName}** has abandoned me...just like my father.`,
 	`Ding, Dong! The **${member.displayName}** is dead!`];
 
@@ -91,7 +97,7 @@ client.on('guildMemberRemove', (member) => {
 
 
 try {
-		client.channels.cache.get("606901598635163708").send(goodbyes[goodbyemessage]);
+	client.channels.cache.get("606901598635163708").send(goodbyes[goodbyemessage]);
 } catch(error){
     console.log("[ERROR]",error)}
 })
@@ -109,8 +115,8 @@ client.on('guildBanAdd', async (guild, user) => {
 	let embed = new Discord.MessageEmbed()
 		.setTitle("**User Banned**")
 		.setColor("#bc0000")
-	  .setTimestamp()
-	  .setDescription(stripIndents`**Banned User:** ${user.username}
+	  	.setTimestamp()
+		.setDescription(stripIndents`**Banned User:** ${user.username}
 	  **Responsible Moderator:** ${entry.executor.username}`);
 
 	try {
