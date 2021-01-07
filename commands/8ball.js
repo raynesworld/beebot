@@ -10,23 +10,23 @@ module.exports = {
 		let replies =
 		["Probably not.",
 		"ABSOLUTELY NOT.",
-    "No way, José.",
+		"No way, José.",
 		"Yikes sweaty, this is why you're inkwell.",
 		"Okay, fine, whatever.",
 		"Can't figure it out for yourself, huh?",
 		"Try again later, I'm sleeping.",
-    "Begone, thot.",
+		"Begone, thot.",
 		"YES! .......sike.",
-    "Hell to the yeah.",
-    "Anything your little heart desires.",
-    "If I say yes will you go away?",
-    "Definitely.",
-    "Sure, why not?",
+		"Hell to the yeah.",
+		"Anything your little heart desires.",
+		"If I say yes will you go away?",
+		"Definitely.",
+		"Sure, why not?",
 		"Why are you asking me if you're just going to ignore my answer?",
 		"I don't know, ask your mom.",
-    "If you really have to ask, you're dumber than I thought.",
-    "Ouch, no need to shake me so hard.",
-    "Without a doubt."
+		"If you really have to ask, you're dumber than I thought.",
+		"Ouch, no need to shake me so hard.",
+		"Without a doubt."
 		]
 
 		let result = Math.floor(Math.random() * replies.length);
