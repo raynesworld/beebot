@@ -12,7 +12,7 @@ module.exports = {
 
   let embed = new Discord.MessageEmbed()
   .setTitle("Question of the Day")
-  .setDescription(qotd)
+  .setDescription(`<@&835366836639891517>  ` + qotd)
   .setColor("#ffff00")
   .setTimestamp();
 
