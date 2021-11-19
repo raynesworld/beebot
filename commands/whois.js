@@ -4,10 +4,10 @@ const { getMember, formatDate } = require("../functions.js");
 
 module.exports = {
 	name: 'whois',
-  category: 'info',
+  	category: 'info',
 	description: 'Gets information about a user',
 	usage: '[user]',
-  aliases: ['userinfo'],
+  	aliases: ['userinfo'],
 	async execute(message, args) {
 
  function checkDays(date) {
@@ -23,17 +23,16 @@ module.exports = {
 
 
   let embed = new Discord.MessageEmbed()
-  .setAuthor(member.user.tag, member.user.avatarURL)
-  .setColor("#ffff00")
-
- .setDescription(stripIndents `**Display Name:** ${member.displayName}
+	.setAuthor(`${member.user.tag}`, member.user.avatarURL())
+  	.setColor("#ffff00")
+	.setDescription(stripIndents `**Display Name:** ${member.displayName}
 	**ID:** ${member.id}
-  **Account Created:** ${member.user.createdAt.toUTCString().substr(0, 16)}
-  **Joined ${message.guild.name}:** ${member.joinedAt.toUTCString().substr(0, 16)}
-  **Roles:** ${roles}`)
+  	**Account Created:** ${member.user.createdAt.toUTCString().substr(0, 16)}
+	**Joined ${message.guild.name}:** ${member.joinedAt.toUTCString().substr(0, 16)}
+	**Roles:** ${roles}`)
 
  try {
-    await message.channel.send(embed);
+    await message.channel.send({ embeds: [embed] });
   } catch(e) {
     console.error(e);
   }
