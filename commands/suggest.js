@@ -1,5 +1,4 @@
 const Discord = require('discord.js');
-const client = new Discord.Client();
 
 module.exports = {
 	name: 'suggest',
@@ -9,22 +8,22 @@ module.exports = {
 	async execute(message, args) {
 
 	let suggestion = args.join(" ");
-  if(!suggestion) return;
+	if(!suggestion) return;
 
 	let sugEmbed = new Discord.MessageEmbed()
 	.setTitle("Server Suggestion")
 	.setDescription(suggestion)
 	.setColor("#ffff00")
-  .setFooter(`Suggested by ${message.author.username}`)
+  	.setFooter(`Suggested by ${message.author.username}`)
 	.setTimestamp();
 
 	let sugChannel = message.guild.channels.cache.find(channel => channel.name === "suggestions");
 	if(!sugChannel) return message.author.send("Can't find channel.");
 
-  if(message.guild === null) return message.channel.send("Please send this in a server channel, not a DM!");
+  	if(message.guild === null) return message.channel.send("Please send this in a server channel, not a DM!");
 
-	message.delete({timeout: 5000});
-	sugChannel.send(sugEmbed).then(async embedMessage => {
+	message.delete({timeout: 500});
+	sugChannel.send({ embeds: [sugEmbed] }).then(async embedMessage => {
 		await embedMessage.react('✅');
 		await embedMessage.react('❌');
 	});
